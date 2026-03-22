@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新茶饮大航海时代：品牌营销全案实战</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700;900&display=swap');
+
+        :root {
+            --paper-white: #f4f1ea; 
+            --ink-black: #2c2928;  
+            --wood-brown: #8b572a; 
+            --dark-brown: #3e2314;
+            --classic-red: #a43a32;
+            --heytea-gold: #c5a059;
+            --luckin-blue: #00225a;
+            --chagee-red: #8c1515;
+            --traditional-red: #a43a32;   
+            --traditional-blue: #2e59a7;  
+            --traditional-yellow: #e2ad1b;
+            --traditional-green: #46713b; 
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background-color: var(--paper-white);
+            color: var(--ink-black);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background-image: url('https://www.transparenttextures.com/patterns/p6.png');
+        }
+
+        .seal {
+            display: inline-block;
+            padding: 4px;
+            border: 2px solid var(--classic-red);
+            color: var(--classic-red);
+            font-weight: 900;
+            font-size: 0.8rem;
+            line-height: 1;
+            transform: rotate(-5deg);
+            transition: all 0.3s ease;
+        }
+        .seal:hover {
+            transform: rotate(0deg) scale(1.1);
+            background-color: var(--classic-red);
+            color: var(--paper-white);
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background: var(--classic-red);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            border-left: 2px solid var(--wood-brown);
+            transition: all 0.3s;
+        }
+        .timeline-item:hover { border-left-color: var(--classic-red); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--wood-brown);
+            border-radius: 50%;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .timeline-item:hover::before {
+            transform: scale(1.5);
+            background: var(--classic-red);
+        }
+
+        .mock-tool {
+            background: white;
+            border: 1px solid #d1ccb9;
+            border-radius: 8px; 
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(62, 35, 20, 0.08);
+            transition: transform 0.3s ease;
+        }
+        .mock-tool:hover { transform: translateY(-5px); }
+
+        .stp-tab {
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 3px solid transparent;
+            opacity: 0.4;
+        }
+        .stp-tab.active {
+            opacity: 1;
+            border-bottom-color: var(--classic-red);
+            transform: translateY(-4px);
+        }
+        .stp-container { display: none; }
+        .stp-container.active { display: block; }
+        .stp-row {
+            display: flex;
+            flex-direction: row;
+            gap: 2px;
+            background: #e5e7eb; 
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .stp-col {
+            flex: 1;
+            background: white;
+            padding: 2.5rem;
+            transition: background 0.3s, transform 0.3s;
+            opacity: 0;
+        }
+        .stp-col:hover { background: #fafafa; }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(var(--rot)); }
+            50% { transform: translateY(-10px) rotate(calc(var(--rot) + 2deg)); }
+        }
+        .word-cloud-tag {
+            position: absolute;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+            animation: float 4s ease-in-out infinite;
+        }
+        .word-cloud-tag:hover {
+            animation-play-state: paused;
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 10;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        @keyframes stamp {
+            0% { transform: scale(3) rotate(-15deg); opacity: 0; }
+            50% { transform: scale(0.9) rotate(5deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+        .animate-stamp {
+            animation: stamp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* 新增：水墨晕染与古典装饰背景 (Watercolor & Oriental Decor) */
+        .ink-wash {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        .ink-red { background: rgba(164, 58, 50, 0.15); }
+        .ink-green { background: rgba(70, 113, 59, 0.12); }
+        .ink-gold { background: rgba(197, 160, 89, 0.15); }
+        .ink-blue { background: rgba(46, 89, 167, 0.12); }
+
+        .deco-icon {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.04; /* 极低透明度的暗纹水印 */
+            z-index: 0;
+            fill: currentColor;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--dark-brown); }
+
+        @media (max-width: 768px) { .stp-row { flex-direction: column; } }
+
+        /* AI Feature Styles */
+        .loading-dots:after {
+            content: '.';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+            80%, 100% { content: ''; }
+        }
+    </style>
+</head>
+<body class="custom-scrollbar">
+
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 px-8 py-4 flex justify-between items-center bg-[#f4f1ea]/90 backdrop-blur-md border-b border-stone-200">
+        <div class="flex items-center space-x-2 group cursor-pointer">
+            <div class="seal group-hover:bg-classic-red group-hover:text-white transition">实战<br>全案</div>
+            <div class="text-xl font-black tracking-widest ml-2 text-stone-900">新茶饮·大航海</div>
+        </div>
+        <div class="hidden md:flex space-x-10 text-sm">
+            <a href="#hero" class="nav-link">云端共创</a>
+            <a href="#timeline" class="nav-link">品牌志</a>
+            <a href="#stp" class="nav-link">STP拆解</a>
+            <a href="#sandbox" class="nav-link text-heytea-gold">创业推演</a>
+            <a href="#quiz" class="nav-link">考功 / 答疑</a>
+        </div>
+    </nav>
+
+    <!-- 1. 首页 (Home) - 云端实时词云 -->
+    <section id="hero" class="min-h-screen pt-32 pb-20 px-8 max-w-7xl mx-auto flex items-center relative overflow-hidden">
+        <!-- 装饰：水墨晕染与祥云 -->
+        <div class="ink-wash ink-gold w-[500px] h-[500px] -top-32 -left-32"></div>
+        <div class="ink-wash ink-red w-[400px] h-[400px] bottom-10 -right-20"></div>
+        <svg class="deco-icon w-[500px] h-[500px] top-10 -right-10 text-wood-brown" viewBox="0 0 1024 1024">
+            <path d="M738.9 444.6c-18.7-48.4-66.2-82.6-121.8-82.6-56.3 0-104.3 35.1-122.5 84.5-13.8-12-32.9-19.4-53.9-19.4-42.5 0-77.1 34.6-77.1 77.1 0 42.5 34.6 77.1 77.1 77.1h298.1c42.5 0 77.1-34.6 77.1-77.1 0-42.5-34.6-77.1-77.1-77.1-2.4 0-4.8 0.1-7.1 0.4z"/>
+            <path d="M300 600 c-15-30-50-50-90-50 c-40 0-75 20-90 50 c-10-10-25-15-40-15 c-30 0-55 25-55 55 c0 30 25 55 55 55 h220 c30 0 55-25 55-55 c0-30-25-55-55-55 c-2 0-3 0-5 0.5z"/>
+        </svg>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full relative z-10">
+            <div class="animate__animated animate__fadeInLeft">
+                <span class="text-classic-red font-bold tracking-[0.3em] uppercase text-xs mb-4 block">Market Insight 2024</span>
+                <h1 class="text-5xl md:text-7xl font-black mb-8 leading-tight text-stone-900">
+                    新茶饮大航海时代：<br>
+                    <span class="text-stone-400">凭什么赢？</span>
+                </h1>
+                <p class="text-lg text-stone-600 mb-10 leading-relaxed max-w-xl">
+                    喜茶的灵感、瑞幸的涅槃、霸王茶姬的东方风骨。我们通过 <b>STP 理论</b> 深度拆解巨头如何在这个内卷时代杀出重围。
+                </p>
+                <div class="flex gap-4">
+                    <a href="#quiz" class="bg-[var(--dark-brown)] text-white px-8 py-4 font-bold text-sm hover:bg-stone-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 rounded-sm">入场测试</a>
+                    <a href="#stp" class="border-2 border-[var(--dark-brown)] text-[var(--dark-brown)] px-8 py-4 font-bold text-sm hover:bg-[var(--dark-brown)] hover:text-white transition rounded-sm">研习策略</a>
+                </div>
+            </div>
+            
+            <div class="animate__animated animate__fadeInRight">
+                <div class="mock-tool p-8 relative bg-white min-h-[500px] flex flex-col shadow-2xl">
+                    <div class="flex items-center justify-between mb-4 border-b border-stone-100 pb-4">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="cloud" class="w-4 h-4 text-[var(--dark-brown)]"></i>
+                            <span class="font-bold text-[10px] uppercase tracking-widest text-stone-400">云端共创词云</span>
+                        </div>
+                        <span class="text-[10px] bg-red-50 text-classic-red px-2 py-1 rounded font-bold animate-pulse flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-classic-red block"></span> LIVE SYNC
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col h-full animate__animated animate__fadeIn">
+                        <p class="text-center font-black text-2xl mb-2 mt-2 leading-tight text-[var(--dark-brown)]">分享你最爱的品牌单品</p>
+                        <p class="text-xs text-stone-400 text-center mb-6 tracking-widest">扫码或输入你最爱的茶饮/咖啡名称</p>
+                        
+                        <!-- 扫码与输入区 -->
+                        <div class="flex items-center gap-4 mb-6 bg-stone-50 p-4 rounded-lg border border-stone-100 shadow-sm">
+                            <div class="shrink-0 bg-white p-1 border border-stone-200 rounded relative group cursor-pointer">
+                                <img id="dynamic-qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://example.com/mentimeter" alt="QR Code" class="w-16 h-16 group-hover:scale-105 transition">
+                                <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[var(--dark-brown)] text-white text-[9px] px-2 py-0.5 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition z-20">邀同好扫码</div>
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span onclick="document.getElementById('wc-input').value='伯牙绝弦'" class="text-[10px] bg-white border border-stone-200 px-2 py-1 rounded-sm cursor-pointer hover:border-chagee-red hover:text-chagee-red transition">伯牙绝弦</span>
+                                    <span onclick="document.getElementById('wc-input').value='酱香拿铁'" class="text-[10px] bg-white border border-stone-200 px-2 py-1 rounded-sm cursor-pointer hover:border-luckin-blue hover:text-luckin-blue transition">酱香拿铁</span>
+                                    <span onclick="document.getElementById('wc-input').value='多肉葡萄'" class="text-[10px] bg-white border border-stone-200 px-2 py-1 rounded-sm cursor-pointer hover:border-heytea-gold hover:text-heytea-gold transition">多肉葡萄</span>
+                                    <span onclick="document.getElementById('wc-input').value='生椰拿铁'" class="text-[10px] bg-white border border-stone-200 px-2 py-1 rounded-sm cursor-pointer hover:border-luckin-blue hover:text-luckin-blue transition">生椰拿铁</span>
+                                    <span onclick="document.getElementById('wc-input').value='芝芝莓莓'" class="text-[10px] bg-white border border-stone-200 px-2 py-1 rounded-sm cursor-pointer hover:border-heytea-gold hover:text-heytea-gold transition">芝芝莓莓</span>
+                                    <span onclick="document.getElementById('wc-input').value='万里木兰'" class="text-[10px] bg-white border border-stone-200 px-2 py-1 rounded-sm cursor-pointer hover:border-chagee-red hover:text-chagee-red transition">万里木兰</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="text" id="wc-input" placeholder="输入您最爱的饮品名称..." class="flex-grow border border-stone-200 px-3 py-2 text-xs focus:outline-none focus:border-[var(--dark-brown)] transition rounded-sm" onkeypress="if(event.key === 'Enter') window.addWordToCloud()">
+                                    <button onclick="window.addWordToCloud()" class="bg-[var(--dark-brown)] text-white px-4 py-2 text-xs font-bold hover:bg-stone-800 transition rounded-sm shadow-sm flex items-center gap-1">
+                                        <i data-lucide="send" class="w-3 h-3"></i> 发送
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 动态词云显示区 -->
+                        <div class="relative flex-grow border border-stone-100 bg-[var(--paper-white)] overflow-hidden min-h-[220px] rounded-lg shadow-inner" id="word-cloud-container">
+                            <div class="absolute inset-0 flex items-center justify-center opacity-30 text-stone-400 text-xs italic z-0">
+                                正在连接云端罗盘...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 品牌志 -->
+    <section id="timeline" class="py-32 bg-[var(--paper-white)] border-y border-stone-200 relative overflow-hidden">
+        <!-- 装饰：青绿水墨与竹叶 -->
+        <div class="ink-wash ink-green w-[600px] h-[600px] top-1/4 -right-48"></div>
+        <svg class="deco-icon w-[600px] h-[600px] bottom-0 -left-20 text-[var(--traditional-green)]" viewBox="0 0 1024 1024">
+            <path d="M100 900 Q 200 600 500 300 Q 400 500 100 900 Z" fill="currentColor"/>
+            <path d="M500 300 Q 600 500 800 700 Q 500 600 400 400 Z" fill="currentColor"/>
+            <path d="M300 700 Q 400 400 700 100 Q 600 300 300 700 Z" fill="currentColor"/>
+            <!-- 模拟竹节线条 -->
+            <line x1="250" y1="750" x2="350" y2="650" stroke="currentColor" stroke-width="20"/>
+            <line x1="450" y1="550" x2="550" y2="450" stroke="currentColor" stroke-width="20"/>
+        </svg>
+
+        <div class="max-w-7xl mx-auto px-8 scroll-reveal relative z-10">
+            <div class="text-center mb-24">
+                <h2 class="text-4xl font-black mb-4 text-[var(--dark-brown)]">品牌志与时光机</h2>
+                <p class="text-stone-400 tracking-widest text-xs uppercase">Tracing the Growth of Giants</p>
+                <div class="w-16 h-1 bg-classic-red mx-auto mt-6"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                <!-- Heytea -->
+                <div class="space-y-10 scroll-reveal" style="transition-delay: 100ms;">
+                    <h3 class="text-3xl font-black flex items-center gap-3 text-[var(--dark-brown)]">
+                        <span class="text-heytea-gold text-4xl leading-none">·</span> 
+                        <a href="https://www.heytea.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-classic-red transition-colors group cursor-pointer" title="访问喜茶官网">
+                            喜茶 <i data-lucide="external-link" class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </a>
+                    </h3>
+                    <div class="timeline-item">
+                        <span class="text-xs font-black text-wood-brown opacity-80 tracking-widest">2012</span>
+                        <p class="text-base font-bold mt-2 text-stone-800">诞生江边里</p>
+                        <p class="text-sm text-stone-500 mt-2 leading-relaxed">抛弃粉末，首创芝士现泡茶，开启新茶饮元年。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="text-xs font-black text-wood-brown opacity-80 tracking-widest">2017</span>
+                        <p class="text-base font-bold mt-2 text-stone-800">上海排队神话</p>
+                        <p class="text-sm text-stone-500 mt-2 leading-relaxed">排队数小时只为一杯，确立“灵感之茶”审美壁垒。</p>
+                    </div>
+                </div>
+                <!-- Luckin -->
+                <div class="space-y-10 scroll-reveal" style="transition-delay: 200ms;">
+                    <h3 class="text-3xl font-black flex items-center gap-3 text-[var(--dark-brown)]">
+                        <span class="text-luckin-blue text-4xl leading-none">·</span> 
+                        <a href="https://www.luckincoffee.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-classic-red transition-colors group cursor-pointer" title="访问瑞幸咖啡官网">
+                            瑞幸 <i data-lucide="external-link" class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </a>
+                    </h3>
+                    <div class="timeline-item">
+                        <span class="text-xs font-black text-luckin-blue opacity-80 tracking-widest">2018</span>
+                        <p class="text-base font-bold mt-2 text-stone-800">闪电式扩张</p>
+                        <p class="text-sm text-stone-500 mt-2 leading-relaxed">以资本补贴和数字化重塑咖啡消费习惯。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="text-xs font-black text-luckin-blue opacity-80 tracking-widest">2023</span>
+                        <p class="text-base font-bold mt-2 text-stone-800">万店涅槃</p>
+                        <p class="text-sm text-stone-500 mt-2 leading-relaxed">跨界联名频出，跨过万店门槛，实现国民化覆盖。</p>
+                    </div>
+                </div>
+                <!-- Chagee -->
+                <div class="space-y-10 scroll-reveal" style="transition-delay: 300ms;">
+                    <h3 class="text-3xl font-black flex items-center gap-3 text-[var(--dark-brown)]">
+                        <span class="text-chagee-red text-4xl leading-none">·</span> 
+                        <a href="https://chagee.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-classic-red transition-colors group cursor-pointer" title="访问霸王茶姬官网">
+                            霸王茶姬 <i data-lucide="external-link" class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </a>
+                    </h3>
+                    <div class="timeline-item">
+                        <span class="text-xs font-black text-chagee-red opacity-80 tracking-widest">2017</span>
+                        <p class="text-base font-bold mt-2 text-stone-800">昆明首店</p>
+                        <p class="text-sm text-stone-500 mt-2 leading-relaxed">深耕原叶茶领域，致敬传统戏曲与东方风骨。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="text-xs font-black text-chagee-red opacity-80 tracking-widest">2024</span>
+                        <p class="text-base font-bold mt-2 text-stone-800">东方标杆</p>
+                        <p class="text-sm text-stone-500 mt-2 leading-relaxed">公开成分表，以“健康低负担”席卷全国。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. STP策略深度拆解 -->
+    <section id="stp" class="py-32 bg-[#faf9f6] relative overflow-hidden">
+        <!-- 装饰：石青水墨与古典折扇 -->
+        <div class="ink-wash ink-blue w-[700px] h-[700px] -bottom-64 -left-48"></div>
+        <svg class="deco-icon w-[700px] h-[700px] top-10 -right-20 text-[var(--dark-brown)] -rotate-12 opacity-[0.03]" viewBox="0 0 1024 1024">
+            <path d="M100 900 A 400 400 0 0 1 900 900 L 500 900 Z" fill="none" stroke="currentColor" stroke-width="20"/>
+            <path d="M200 900 A 300 300 0 0 1 800 900" fill="none" stroke="currentColor" stroke-width="10" stroke-dasharray="20,10"/>
+            <line x1="500" y1="900" x2="160" y2="690" stroke="currentColor" stroke-width="10"/>
+            <line x1="500" y1="900" x2="280" y2="550" stroke="currentColor" stroke-width="10"/>
+            <line x1="500" y1="900" x2="500" y2="500" stroke="currentColor" stroke-width="15"/>
+            <line x1="500" y1="900" x2="720" y2="550" stroke="currentColor" stroke-width="10"/>
+            <line x1="500" y1="900" x2="840" y2="690" stroke="currentColor" stroke-width="10"/>
+            <circle cx="500" cy="900" r="30" fill="currentColor"/>
+        </svg>
+
+        <div class="max-w-7xl mx-auto px-8 scroll-reveal relative z-10">
+            <div class="mb-16 text-center">
+                <div class="seal mb-4 text-xl border-[3px]">核心<br>研习</div>
+                <h2 class="text-4xl font-black mt-4 text-[var(--dark-brown)]">STP 策略深度拆解</h2>
+                <p class="mt-4 text-stone-500 text-sm italic">研读心法，并选择品牌解锁横向解析报告</p>
+            </div>
+
+            <!-- STP 理论释义小版块 -->
+            <div class="mb-20 bg-white border border-stone-200 p-8 md:p-12 shadow-sm relative overflow-hidden group">
+                <div class="absolute -right-12 -bottom-16 text-[15rem] font-black text-stone-50 opacity-60 select-none leading-none transition-transform duration-1000 group-hover:scale-110">策</div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-3 mb-10 border-b border-stone-100 pb-4">
+                        <span class="w-2 h-2 bg-classic-red rotate-45"></span>
+                        <h3 class="text-xl font-black text-[var(--dark-brown)] tracking-widest">策论心法 · 理论释义</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div class="relative">
+                            <span class="absolute -left-5 -top-8 text-7xl font-black text-stone-100 opacity-80 z-0 select-none">S</span>
+                            <div class="relative z-10">
+                                <h4 class="text-lg font-bold text-classic-red mb-1 tracking-widest">市场细分</h4>
+                                <p class="text-[10px] uppercase text-stone-400 mb-4 tracking-[0.2em]">Segmentation</p>
+                                <p class="text-xs text-stone-600 leading-loose">辨识消费者的差异化需求。将汪洋大海般的市场，精准划分为特征相近的细分群体。</p>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute -left-5 -top-8 text-7xl font-black text-stone-100 opacity-80 z-0 select-none">T</span>
+                            <div class="relative z-10">
+                                <h4 class="text-lg font-bold text-classic-red mb-1 tracking-widest">目标市场</h4>
+                                <p class="text-[10px] uppercase text-stone-400 mb-4 tracking-[0.2em]">Targeting</p>
+                                <p class="text-xs text-stone-600 leading-loose">评估潜力与品牌契合度。集中有限资源，攻克最能产生商业价值的核心阵地。</p>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute -left-5 -top-8 text-7xl font-black text-stone-100 opacity-80 z-0 select-none">P</span>
+                            <div class="relative z-10">
+                                <h4 class="text-lg font-bold text-classic-red mb-1 tracking-widest">市场定位</h4>
+                                <p class="text-[10px] uppercase text-stone-400 mb-4 tracking-[0.2em]">Positioning</p>
+                                <p class="text-xs text-stone-600 leading-loose">塑造不可替代的品牌灵魂。在目标受众心智中，锚定独特位置，成为该品类的代名词。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Navigation Tabs -->
+            <div class="flex justify-center mb-16 gap-4 md:gap-12">
+                <div onclick="window.switchSTP('heytea')" id="tab-heytea" class="stp-tab active px-6 pb-2 text-center group">
+                    <span class="text-xl font-black block group-hover:text-heytea-gold transition">喜茶 HEYTEA</span>
+                    <span class="text-[9px] uppercase tracking-widest text-heytea-gold font-bold">Inspiration-Led</span>
+                </div>
+                <div onclick="window.switchSTP('luckin')" id="tab-luckin" class="stp-tab px-6 pb-2 text-center group">
+                    <span class="text-xl font-black block group-hover:text-luckin-blue transition">瑞幸 LUCKIN</span>
+                    <span class="text-[9px] uppercase tracking-widest text-luckin-blue font-bold">Data-Driven</span>
+                </div>
+                <div onclick="window.switchSTP('chagee')" id="tab-chagee" class="stp-tab px-6 pb-2 text-center group">
+                    <span class="text-xl font-black block group-hover:text-chagee-red transition">霸王茶姬 CHAGEE</span>
+                    <span class="text-[9px] uppercase tracking-widest text-chagee-red font-bold">Culture-Rooted</span>
+                </div>
+            </div>
+
+            <!-- STP Content Area -->
+            <div class="relative overflow-hidden min-h-[400px]">
+                <!-- Heytea Content -->
+                <div id="content-heytea" class="stp-container active">
+                    <div class="stp-row shadow-lg">
+                        <div class="stp-col" id="heytea-s" style="opacity: 1; transform: translateY(0);">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-8 h-[3px] bg-heytea-gold"></span>
+                                <span class="text-[10px] font-black uppercase text-stone-400">Segmentation</span>
+                            </div>
+                            <h4 class="text-xl font-black mb-4 text-[var(--dark-brown)]">审美与灵感的社交场</h4>
+                            <p class="text-sm leading-loose text-stone-600">将茶饮从单纯的解渴工具细分为“审美载体”。关注追求精致主义、注重视觉愉悦且愿意为“灵感”支付品牌溢价的社交活跃人群。</p>
+                        </div>
+                        <div class="stp-col" id="heytea-t" style="opacity: 1; transform: translateY(0);">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-8 h-[3px] bg-heytea-gold"></span>
+                                <span class="text-[10px] font-black uppercase text-stone-400">Targeting</span>
+                            </div>
+                            <h4 class="text-xl font-black mb-4 text-[var(--dark-brown)]">核心一二线城市 Z世代</h4>
+                            <p class="text-sm leading-loose text-stone-600">精准切入 18-35 岁、对潮流有极强感知力的年轻白领与学生。选址坚持“头部商圈 B1/L1”，确立其在高端新茶饮市场的统治地位。</p>
+                        </div>
+                        <div class="stp-col" id="heytea-p" style="opacity: 1; transform: translateY(0);">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-8 h-[3px] bg-heytea-gold"></span>
+                                <span class="text-[10px] font-black uppercase text-stone-400">Positioning</span>
+                            </div>
+                            <h4 class="text-xl font-black mb-4 text-[var(--dark-brown)]">茶饮界的苹果：灵感之茶</h4>
+                            <p class="text-sm leading-loose text-stone-600">定位于“激发灵感的现代禅意”。通过持续的艺术联名与高质感门店设计，在用户心智中建立起一种“喝喜茶即是潮流”的行为艺术感。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Luckin Content -->
+                <div id="content-luckin" class="stp-container">
+                    <div class="stp-row shadow-lg">
+                        <div class="stp-col" id="luckin-s">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-8 h-[3px] bg-luckin-blue"></span>
+                                <span class="text-[10px] font-black uppercase text-stone-400">Segmentation</span>
+                            </div>
+                            <h4 class="text-xl font-black mb-4 text-[var(--dark-brown)]">高频刚需的职场燃料</h4>
+                            <p class="text-sm leading-loose text-stone-600">将咖啡市场从“慢生活空间”切分为“高效机能补给”。重点关注追求极致便利、高性价比且有每日咖啡摄入习惯的刚需消费段。</p>
+                        </div>
+                        <div class="stp-col" id="luckin-t">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-8 h-[3px] bg-luckin-blue"></span>
+                                <span class="text-[10px] font-black uppercase text-stone-400">Targeting</span>
+                            </div>
+                            <h4 class="text-xl font-black mb-4 text-[var(--dark-brown)]">全域白领与高压职场人</h4>
+                            <p class="text-sm leading-loose text-stone-600">覆盖 20-45 岁、注重效率大于社交体验的职场人士。通过密集且精简的 Pick-up 店型，渗透至写字楼每一处角落，打造“无限场景”。</p>
+                        </div>
+                        <div class="stp-col" id="luckin-p">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-8 h-[3px] bg-luckin-blue"></span>
+                                <span class="text-[10px] font-black uppercase text-stone-400">Positioning</span>
+                            </div>
+                            <h4 class="text-xl font-black mb-4 text-[var(--dark-brown)]">高品质、科技咖啡</h4>
+                            <p class="text-sm leading-loose text-stone-600">定位于“好喝不贵的职场陪伴”。利用数字化运营消除多余溢价，在心智中成功占据了“星巴克之外第一高品质快取选择”。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chagee Content -->
+                <div id="content-chagee" class="stp-container">
+                    <div class="stp-row shadow-lg">
+                        <div class="stp-col" id="chagee-s">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-8 h-[3px] bg-chagee-red"></span>
+                                <span class="text-[10px] font-black uppercase text-stone-400">Segmentation</span>
+                            </div>
+                            <h4 class="text-xl font-black mb-4 text-[var(--dark-brown)]">原叶回归的健康茶市场</h4>
+                            <p class="text-sm leading-loose text-stone-600">细分出追求“真茶感”与“低负担”的健康茶饮区位。区别于高糖配料茶，强调“原叶鲜奶”这一清爽属性，唤醒大众对茶本味的认知。</p>
+                        </div>
+                        <div class="stp-col" id="chagee-t">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-8 h-[3px] bg-chagee-red"></span>
+                                <span class="text-[10px] font-black uppercase text-stone-400">Targeting</span>
+                            </div>
+                            <h4 class="text-xl font-black mb-4 text-[var(--dark-brown)]">文化自信的年轻大众群体</h4>
+                            <p class="text-sm leading-loose text-stone-600">核心群体为 18-40 岁、对东方文化有强烈认同感且注重摄入健康的消费者。通过极具辨识度的“红蓝织锦”包装吸引审美共鸣。</p>
+                        </div>
+                        <div class="stp-col" id="chagee-p">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-8 h-[3px] bg-chagee-red"></span>
+                                <span class="text-[10px] font-black uppercase text-stone-400">Positioning</span>
+                            </div>
+                            <h4 class="text-xl font-black mb-4 text-[var(--dark-brown)]">东方茶，全球友</h4>
+                            <p class="text-sm leading-loose text-stone-600">定位于“新中式高级茶饮”。通过伯牙绝弦这一现象级单品，将东方茶道与西方快餐逻辑结合，打造跨国界的民族品牌符号。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新增：创业沙盘 (Entrepreneur Sandbox) -->
+    <section id="sandbox" class="py-32 bg-[var(--paper-white)] border-b border-stone-200 relative overflow-hidden">
+        <div class="absolute top-10 left-10 text-[15rem] font-black text-stone-100 opacity-60 select-none z-0">局</div>
+        <div class="absolute bottom-10 right-10 text-[15rem] font-black text-stone-100 opacity-60 select-none z-0">道</div>
+        
+        <!-- 装饰：茶汤水墨与盖碗暗纹 -->
+        <div class="ink-wash ink-gold w-[400px] h-[400px] top-1/4 left-1/3"></div>
+        <svg class="deco-icon w-[400px] h-[400px] bottom-10 left-10 text-[var(--wood-brown)] opacity-[0.05]" viewBox="0 0 1024 1024">
+            <!-- 盖碗的盖子 -->
+            <path d="M400 350 C 400 250 600 250 600 350 Z" fill="none" stroke="currentColor" stroke-width="25"/>
+            <line x1="480" y1="270" x2="520" y2="270" stroke="currentColor" stroke-width="20" stroke-linecap="round"/>
+            <!-- 盖碗的碗身 -->
+            <path d="M300 400 C 300 650 700 650 700 400 Z" fill="none" stroke="currentColor" stroke-width="30"/>
+            <line x1="250" y1="400" x2="750" y2="400" stroke="currentColor" stroke-width="30" stroke-linecap="round"/>
+            <!-- 盖碗的托盘 -->
+            <path d="M320 680 C 320 750 680 750 680 680" fill="none" stroke="currentColor" stroke-width="25"/>
+        </svg>
+
+        <div class="max-w-6xl mx-auto px-8 relative z-10 scroll-reveal">
+            <div class="text-center mb-16">
+                <div class="seal mb-4 text-xl border-[3px]">推演</div>
+                <h2 class="text-4xl font-black mt-4 text-[var(--dark-brown)]">茶饮大亨 · 创业沙盘</h2>
+                <p class="mt-4 text-stone-500 text-sm italic">沉浸式 RPG 演练：你的每一次商业抉择，都将改写品牌命运</p>
+            </div>
+
+            <div class="mock-tool bg-white shadow-2xl p-0 flex flex-col md:flex-row min-h-[550px] border-stone-200">
+                <!-- 左侧：状态与氛围 -->
+                <div class="md:w-2/5 bg-[var(--dark-brown)] p-12 flex flex-col justify-between text-[var(--paper-white)] relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-[10px] font-black tracking-[0.3em] uppercase opacity-60">Brand Sandbox</span>
+                        <h3 id="sb-stage-title" class="text-4xl font-black mt-4 mb-2">第一局：择道</h3>
+                        <p id="sb-stage-subtitle" class="text-sm opacity-80 tracking-widest">Segmentation</p>
+                    </div>
+                    <div class="relative z-10 mt-10">
+                        <p class="text-xs tracking-widest opacity-60 mb-2">品牌声望 (Brand Equity)</p>
+                        <div class="text-6xl font-black text-heytea-gold flex items-baseline gap-2">
+                            <span id="sb-score">0</span>
+                            <span class="text-lg opacity-50">点</span>
+                        </div>
+                    </div>
+                    <!-- 装饰圆环 -->
+                    <div class="absolute -bottom-24 -right-24 w-80 h-80 border-[30px] border-stone-700 rounded-full opacity-20"></div>
+                </div>
+
+                <!-- 右侧：剧情与抉择 -->
+                <div class="md:w-3/5 p-12 flex flex-col bg-[#fbfaf5]">
+                    <div id="sb-content" class="flex-grow flex flex-col justify-center animate__animated animate__fadeIn">
+                        <p id="sb-desc" class="text-lg text-[var(--dark-brown)] leading-loose font-bold mb-10 border-l-4 border-classic-red pl-6">
+                            载入剧情中...
+                        </p>
+                        <div id="sb-options" class="space-y-4 flex-grow flex flex-col justify-center">
+                            <!-- 选项按钮由 JS 生成 -->
+                        </div>
+                    </div>
+
+                    <!-- 结算面板 -->
+                    <div id="sb-result" class="hidden flex-grow flex flex-col justify-center items-center text-center animate__animated animate__fadeIn">
+                        <div class="seal mb-6 text-4xl p-6 border-[4px]">终局</div>
+                        <h3 id="sb-result-title" class="text-4xl font-black text-classic-red mb-4 tracking-widest">判定中...</h3>
+                        <p id="sb-result-desc" class="text-stone-600 leading-loose mb-12 max-w-md text-sm">
+                            结算详情...
+                        </p>
+                        <button onclick="window.initSandbox()" class="border-2 border-[var(--dark-brown)] text-[var(--dark-brown)] px-12 py-4 text-sm font-black hover:bg-[var(--dark-brown)] hover:text-white transition tracking-widest uppercase rounded-sm">
+                            再开一局
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 互动挑战区 & AI 答疑 -->
+    <section id="quiz" class="py-32 bg-[var(--dark-brown)] text-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-64 h-64 bg-classic-red opacity-10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-wood-brown opacity-20 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+
+        <div class="max-w-7xl mx-auto px-8 relative z-10 scroll-reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black mb-4 text-[var(--paper-white)]">茶饮策论 · 考功挑战</h2>
+                <p class="text-stone-400 tracking-[0.2em] text-xs uppercase italic">Marketing Master Quiz</p>
+                <div class="w-16 h-1 bg-classic-red mx-auto mt-6"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <!-- Quiz Engine -->
+                <div class="lg:col-span-8">
+                    <div id="kahoot-container" class="mock-tool border-stone-700 bg-[var(--paper-white)] text-stone-900 shadow-2xl p-0 relative min-h-[580px]">
+                        <div class="absolute top-0 left-0 h-1 bg-classic-red transition-all duration-300 z-20" id="quiz-progress-bar" style="width: 0%"></div>
+
+                        <div id="kahoot-start" class="absolute inset-0 z-10 flex flex-col items-center justify-center p-12 bg-[var(--paper-white)] bg-opacity-95">
+                            <div class="w-24 h-24 border-4 border-stone-800 flex items-center justify-center mb-8 rotate-45 transform hover:rotate-[225deg] transition duration-700">
+                                <span class="text-4xl font-black -rotate-45 text-stone-900">考</span>
+                            </div>
+                            <h3 class="text-3xl font-black mb-4 tracking-widest text-[var(--dark-brown)]">茶饮营销 · 策论摸底</h3>
+                            <p class="text-stone-500 mb-10 text-sm max-w-sm text-center leading-loose">
+                                十道策论，计一万分。<br>请阁下审慎落笔，步步为营。
+                            </p>
+                            <button onclick="window.startQuiz()" class="border-2 border-[var(--dark-brown)] bg-[var(--dark-brown)] text-white px-16 py-4 font-black text-lg hover:bg-stone-900 transition duration-500 tracking-widest rounded-sm">
+                                开启挑战
+                            </button>
+                        </div>
+
+                        <div id="kahoot-main" class="hidden flex flex-col h-full p-10 bg-[#fbfaf5]">
+                            <div class="flex justify-between items-center mb-10 border-b border-stone-200 pb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[10px] font-black uppercase text-stone-400">题序</span>
+                                    <span id="quiz-counter" class="text-sm font-black italic">01 / 10</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[10px] font-black uppercase text-stone-400">功勋</span>
+                                    <span id="quiz-score-display" class="text-sm font-black text-classic-red tracking-widest">0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex-grow flex flex-col items-center justify-center">
+                                <h4 id="quiz-question" class="text-2xl font-black mb-12 leading-relaxed max-w-2xl text-center text-[var(--dark-brown)]">题目加载中...</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl" id="quiz-options"></div>
+                            </div>
+                        </div>
+
+                        <div id="kahoot-feedback" class="hidden absolute inset-0 z-20 flex flex-col items-center justify-center bg-[var(--paper-white)] bg-opacity-95 p-8">
+                            <div id="feedback-stamp" class="w-48 h-48 border-[8px] border-classic-red rounded-full flex items-center justify-center text-classic-red font-black text-6xl tracking-widest rotate-[-15deg]">合</div>
+                        </div>
+
+                        <div id="kahoot-result" class="hidden absolute inset-0 z-10 flex flex-col items-center justify-center p-12 bg-stone-900 text-[#f4f1ea] text-center">
+                            <div class="seal mb-6 border-[#f4f1ea] text-[#f4f1ea] text-2xl p-4">终章</div>
+                            <h3 class="text-3xl font-black mb-6">考功结算</h3>
+                            <div id="final-score" class="text-8xl font-black my-4 text-classic-red">0</div>
+                            <p id="quiz-rank" class="text-2xl font-black text-heytea-gold mb-10 tracking-widest opacity-0"></p>
+                            <button onclick="location.reload()" class="border border-[#f4f1ea] px-12 py-3 text-xs font-black hover:bg-[#f4f1ea] hover:text-stone-900 transition tracking-widest uppercase rounded-sm">
+                                再启征程
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Ask Board - Gemini LLM -->
+                <div class="lg:col-span-4">
+                    <div class="mock-tool border-stone-700 bg-[#2c2928] p-0 flex flex-col h-full shadow-2xl relative">
+                        <div class="bg-stone-800 text-[#f4f1ea] p-6 border-b border-stone-700 flex justify-between items-center">
+                            <span class="text-xs font-black tracking-widest uppercase flex items-center gap-2">
+                                <i data-lucide="sparkles" class="w-4 h-4 text-heytea-gold"></i> 智囊策问 · AI答疑
+                            </span>
+                            <span class="text-[9px] text-stone-400 border border-stone-600 px-2 py-1 rounded flex items-center gap-1">
+                                Gemini <div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+                            </span>
+                        </div>
+                        
+                        <div id="chat-history" class="p-6 space-y-4 overflow-y-auto max-h-[400px] custom-scrollbar flex-grow text-sm">
+                            <div class="flex gap-3 items-start">
+                                <div class="w-8 h-8 rounded bg-stone-700 flex items-center justify-center shrink-0 border border-stone-600 text-heytea-gold text-xs font-black">智</div>
+                                <div class="bg-stone-800 border border-stone-700 p-3 rounded-r-lg rounded-bl-lg text-stone-300 text-xs leading-loose max-w-[85%]">
+                                    阁下有礼。吾乃搭载大语言模型的营销智囊阁老，精通茶饮商战与 STP 策论。若有品牌疑难，尽可发问。
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Loading Indicator -->
+                        <div id="ai-loading" class="hidden absolute bottom-20 left-6 flex items-center gap-2 bg-stone-800 border border-stone-700 px-4 py-2 rounded-full shadow-lg">
+                            <div class="w-2 h-2 bg-heytea-gold rounded-full animate-bounce"></div>
+                            <div class="w-2 h-2 bg-heytea-gold rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                            <div class="w-2 h-2 bg-heytea-gold rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                            <span class="text-[10px] text-stone-400 ml-2 tracking-widest">智囊思索中...</span>
+                        </div>
+
+                        <div class="p-4 border-t border-stone-800 bg-stone-900 flex gap-2">
+                            <input type="text" id="ai-input" placeholder="请教阁老：瑞幸如何应对下沉市场？" class="w-full bg-[#2c2928] border border-stone-700 px-4 py-3 text-xs text-stone-300 focus:outline-none focus:border-heytea-gold transition rounded-sm" onkeypress="if(event.key === 'Enter') window.askGemini()">
+                            <button onclick="window.askGemini()" class="bg-stone-800 border border-stone-700 hover:border-heytea-gold text-heytea-gold px-4 py-2 transition rounded-sm flex items-center justify-center">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16 bg-[#2c1a0f] text-stone-500 text-center border-t border-stone-800">
+        <p class="text-[10px] tracking-[0.5em] uppercase opacity-70">Branding Strategy & Oriental Aesthetics Lab</p>
+        <p class="text-xs mt-4">用新中式美学，解构现代商业法则</p>
+    </footer>
+
+    <!-- JS Module for Firebase & Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, getDoc, updateDoc, onSnapshot, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Gemini API Key for LLM feature
+        const apiKey = ""; 
+
+        // 1. Initial State & UI functions
+        lucide.createIcons();
+
+        // 滚动揭示动画
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+            // 动态生成指向当前页面的真实二维码
+            const qrImg = document.getElementById('dynamic-qr-code');
+            if (qrImg) {
+                // 抓取当前窗口的真实URL
+                const currentUrl = encodeURIComponent(window.location.href);
+                qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${currentUrl}`;
+            }
+        });
+
+        window.switchSTP = function(brand) {
+            document.querySelectorAll('.stp-tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(`tab-${brand}`).classList.add('active');
+
+            document.querySelectorAll('.stp-container').forEach(el => el.classList.remove('active'));
+            const activeContent = document.getElementById(`content-${brand}`);
+            activeContent.classList.add('active');
+
+            const cols = activeContent.querySelectorAll('.stp-col');
+            cols.forEach(col => {
+                col.style.opacity = '0';
+                col.style.transform = 'translateY(20px)';
+            });
+
+            setTimeout(() => {
+                cols.forEach((col, index) => {
+                    setTimeout(() => {
+                        col.style.transition = 'all 0.5s ease-out';
+                        col.style.opacity = '1';
+                        col.style.transform = 'translateY(0)';
+                    }, index * 150);
+                });
+            }, 50);
+        }
+
+        // 2. Firebase Setup & Sync logic (Rule 1, 2, 3 compliant)
+        let app, auth, db, user, appId;
+        
+        // Initial Local Words
+        window.words = [
+            { text: "伯牙绝弦", weight: 6 },
+            { text: "酱香拿铁", weight: 5 },
+            { text: "多肉葡萄", weight: 5 },
+            { text: "生椰拿铁", weight: 4 },
+            { text: "芝芝莓莓", weight: 3 },
+            { text: "万里木兰", weight: 3 },
+            { text: "丝绒拿铁", weight: 2 },
+            { text: "青青糯山", weight: 2 }
+        ];
+
+        const cloudColors = [
+            'var(--classic-red)', 'var(--luckin-blue)', 'var(--heytea-gold)', 'var(--wood-brown)', '#6b7280'
+        ];
+
+        window.renderWordCloud = function() {
+            const container = document.getElementById('word-cloud-container');
+            if(!container) return;
+            container.innerHTML = '';
+            
+            window.words.forEach((w, i) => {
+                const span = document.createElement('span');
+                span.innerText = w.text;
+                span.className = 'word-cloud-tag font-black absolute drop-shadow-sm';
+                
+                const size = Math.min(0.8 + (w.weight - 1) * 0.4, 3.5);
+                span.style.fontSize = `${size}rem`;
+                span.style.top = `${10 + Math.random() * 70}%`;
+                span.style.left = `${5 + Math.random() * 70}%`;
+                
+                const rot = -15 + Math.random() * 30;
+                span.style.setProperty('--rot', `${rot}deg`);
+                span.style.transform = `rotate(${rot}deg)`;
+                span.style.color = cloudColors[i % cloudColors.length];
+                span.style.animationDelay = `${Math.random() * 2}s`;
+                span.style.opacity = Math.min(0.6 + (w.weight * 0.1), 1);
+                span.style.zIndex = w.weight;
+
+                container.appendChild(span);
+            });
+        }
+
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        if (firebaseConfig) {
+            try {
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                const initAuth = async () => {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                };
+
+                onAuthStateChanged(auth, (currentUser) => {
+                    user = currentUser;
+                    if (user) {
+                        // Setup Realtime Word Cloud Listener
+                        const wordsColl = collection(db, 'artifacts', appId, 'public', 'data', 'favorite_drinks');
+                        onSnapshot(wordsColl, (snapshot) => {
+                            if (!snapshot.empty) {
+                                window.words = [];
+                                snapshot.forEach(doc => {
+                                    window.words.push(doc.data());
+                                });
+                            }
+                            window.renderWordCloud();
+                        }, (error) => {
+                            console.error("Firestore sync error:", error);
+                        });
+                    }
+                });
+
+                initAuth();
+            } catch(e) {
+                console.log("Firebase integration skipped offline", e);
+                window.renderWordCloud();
+            }
+        } else {
+            window.renderWordCloud();
+        }
+
+        window.addWordToCloud = async function() {
+            const input = document.getElementById('wc-input');
+            const text = input.value.trim();
+            if (!text) return;
+            input.value = '';
+
+            const container = document.getElementById('word-cloud-container');
+            container.classList.remove('animate__animated', 'animate__pulse');
+            void container.offsetWidth;
+            container.classList.add('animate__animated', 'animate__pulse');
+
+            if (db && user) {
+                try {
+                    const safeId = encodeURIComponent(text);
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'favorite_drinks', safeId);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        await updateDoc(docRef, { weight: increment(1) });
+                    } else {
+                        await setDoc(docRef, { text: text, weight: 2 });
+                    }
+                } catch(e) {
+                    console.error("Save error:", e);
+                }
+            } else {
+                // Offline fallback
+                const existing = window.words.find(w => w.text === text);
+                if (existing) existing.weight += 1;
+                else window.words.push({ text: text, weight: 2 });
+                window.renderWordCloud();
+            }
+        }
+
+        // 3. Quiz Logic
+        const quizQuestions = [
+            { q: "历史篇：喜茶最初在江边里开店时，原名叫什么？", o: ["皇茶", "御茶", "贡茶", "喜茶"], a: 0 },
+            { q: "单品篇：瑞幸与茅台联名的现象级爆款单品是？", o: ["酒香咖啡", "酱香拿铁", "茅台玛奇朵", "生椰拿铁"], a: 1 },
+            { q: "溯源篇：霸王茶姬起源于中国哪一个省份？", o: ["广东省", "四川省", "福建省", "云南省"], a: 3 },
+            { q: "理论篇：STP理论中，'Positioning' 指的是什么？", o: ["寻找线下门店位置", "在用户心智中建立定位", "制定产品价格", "划分消费者年龄"], a: 1 },
+            { q: "单品篇：霸王茶姬最核心的明星单品是？", o: ["芝芝莓莓", "陨石拿铁", "伯牙绝弦", "茉莉奶绿"], a: 2 },
+            { q: "战略篇：喜茶与FENDI的跨界联名，最主要强化了STP中的哪一环？", o: ["Segmentation (下沉市场)", "Targeting (吸引群体)", "Positioning (提升调性)", "Pricing (单纯涨价)"], a: 2 },
+            { q: "洞察篇：霸王茶姬在2024年推行的“健康透明化”核心举措是？", o: ["全部换成代糖", "公开产品身份证与热量表", "请健身教练代言", "只卖纯茶不加奶"], a: 1 },
+            { q: "实战篇：作为瑞幸操盘手，面对低价咖啡竞争，最符合既有策略的反击是？", o: ["直接关店避开竞争", "全面升级为高端精品咖啡", "利用供应链优势持续发券", "推出奶茶系列硬刚"], a: 2 },
+            { q: "判断篇：进行市场细分(S)时，细分人群的规模是越小越好吗？", o: ["对，越小越能精准打击", "错，需保证足够的利润空间与增长潜力"], a: 1 },
+            { q: "模式篇：区别于喜茶的“第三空间”，瑞幸多数门店采用哪种模式？", o: ["Pick-up 快取店", "无人自助店", "大型烘焙工坊", "纯外卖仓"], a: 0 }
+        ];
+        
+        const symbols = ["乾", "坤", "震", "巽"];
+        const colorClasses = ["border-classic-red text-classic-red", "border-blue-700 text-blue-700", "border-yellow-600 text-yellow-600", "border-green-700 text-green-700"];
+        
+        let currQ = 0; 
+        let quizScore = 0;
+        let isAnswering = false;
+
+        window.startQuiz = function() {
+            document.getElementById('kahoot-start').classList.add('hidden');
+            document.getElementById('kahoot-main').classList.remove('hidden');
+            showQ();
+        }
+
+        function showQ() {
+            isAnswering = false;
+            const q = quizQuestions[currQ];
+            document.getElementById('quiz-question').innerText = q.q;
+            document.getElementById('quiz-counter').innerText = `题序 ${String(currQ + 1).padStart(2, '0')} / 10`;
+            document.getElementById('quiz-progress-bar').style.width = `${(currQ / quizQuestions.length) * 100}%`;
+            
+            const container = document.getElementById('quiz-options');
+            container.innerHTML = '';
+            
+            q.o.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = `p-6 border-2 border-stone-200 hover:border-[var(--dark-brown)] bg-white hover:bg-stone-50 transition transform hover:-translate-y-1 font-bold text-sm text-[var(--dark-brown)] rounded-lg flex items-center justify-start gap-4 shadow-sm w-full text-left`;
+                
+                const icon = document.createElement('span');
+                icon.className = `text-xl ${colorClasses[i]} font-black opacity-80 w-8`;
+                icon.innerText = symbols[i];
+                
+                const text = document.createElement('span');
+                text.innerText = opt;
+                text.className = "text-base flex-grow";
+
+                btn.appendChild(icon);
+                btn.appendChild(text);
+
+                btn.onclick = () => handleAnswer(i, q.a);
+                container.appendChild(btn);
+            });
+        }
+
+        function handleAnswer(selected, correct) {
+            if (isAnswering) return;
+            isAnswering = true;
+
+            const feedback = document.getElementById('kahoot-feedback');
+            const stamp = document.getElementById('feedback-stamp');
+            
+            feedback.classList.remove('hidden');
+            stamp.classList.remove('animate-stamp', 'border-classic-red', 'text-classic-red', 'border-stone-500', 'text-stone-500');
+            void stamp.offsetWidth; 
+
+            if (selected === correct) {
+                quizScore += 1000;
+                document.getElementById('quiz-score-display').innerText = `功勋 ${quizScore}`;
+                stamp.innerText = "合";
+                stamp.classList.add('border-classic-red', 'text-classic-red', 'animate-stamp');
+            } else {
+                stamp.innerText = "谬";
+                stamp.classList.add('border-stone-500', 'text-stone-500', 'animate-stamp');
+            }
+
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+                currQ++;
+                if (currQ < quizQuestions.length) {
+                    showQ();
+                } else {
+                    endQ();
+                }
+            }, 1200);
+        }
+
+        function endQ() {
+            document.getElementById('quiz-progress-bar').style.width = '100%';
+            setTimeout(() => {
+                document.getElementById('kahoot-main').classList.add('hidden');
+                document.getElementById('kahoot-result').classList.remove('hidden');
+                document.getElementById('kahoot-result').classList.add('animate__fadeIn');
+                
+                let rankText = "";
+                if (quizScore === 10000) rankText = "茶饮阁老 · 宗师境";
+                else if (quizScore >= 8000) rankText = "策略掌柜 · 破局者";
+                else if (quizScore >= 6000) rankText = "营销行家 · 登堂入室";
+                else rankText = "茶饮学徒 · 尚需磨砺";
+
+                const rankEl = document.getElementById('quiz-rank');
+                rankEl.innerText = rankText;
+
+                let displayScore = 0;
+                const scoreElement = document.getElementById('final-score');
+                const interval = setInterval(() => {
+                    displayScore += 200;
+                    if (displayScore >= quizScore) {
+                        displayScore = quizScore;
+                        clearInterval(interval);
+                        rankEl.classList.remove('opacity-0');
+                        rankEl.classList.add('animate__animated', 'animate__fadeInUp');
+                    }
+                    scoreElement.innerText = displayScore;
+                }, 30);
+            }, 300);
+        }
+
+        // 4. Gemini AI Call Logic
+        async function fetchWithRetryAPI(url, options, maxRetries = 5) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return await response.json();
+                } catch (error) {
+                    if (i === maxRetries - 1) throw error;
+                    const delay = Math.pow(2, i) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+
+        window.askGemini = async function() {
+            const inputEl = document.getElementById('ai-input');
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            const chatHistory = document.getElementById('chat-history');
+            const loadingEl = document.getElementById('ai-loading');
+
+            const userMsg = document.createElement('div');
+            userMsg.className = "flex gap-3 items-start flex-row-reverse animate__animated animate__fadeInUp animate__faster";
+            userMsg.innerHTML = `
+                <div class="w-8 h-8 rounded bg-[var(--dark-brown)] flex items-center justify-center shrink-0 border border-stone-600 text-stone-300 text-xs font-black">客</div>
+                <div class="bg-[var(--dark-brown)] border border-stone-700 p-3 rounded-l-lg rounded-br-lg text-stone-200 text-xs leading-loose max-w-[85%] break-words">
+                    ${text}
+                </div>
+            `;
+            chatHistory.appendChild(userMsg);
+            inputEl.value = '';
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            loadingEl.classList.remove('hidden');
+
+            const systemPrompt = "你是一位精通新中式茶饮营销的资深品牌策略顾问（人称“智囊阁老”）。请用古典文雅的辞藻结合现代商业营销术语（如STP、下沉市场、心智定位等），简明扼要地解答用户关于茶饮品牌和营销策略的提问。回答务必精炼，控制在100字左右，直击要害。";
+
+            try {
+                const data = await fetchWithRetryAPI(
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: text }] }],
+                            systemInstruction: { parts: [{ text: systemPrompt }] }
+                        })
+                    }
+                );
+
+                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "阁老正在闭关，请稍后再试。";
+                
+                const aiMsg = document.createElement('div');
+                aiMsg.className = "flex gap-3 items-start animate__animated animate__fadeInUp animate__faster";
+                aiMsg.innerHTML = `
+                    <div class="w-8 h-8 rounded bg-stone-700 flex items-center justify-center shrink-0 border border-stone-600 text-heytea-gold text-xs font-black">智</div>
+                    <div class="bg-stone-800 border border-stone-700 p-3 rounded-r-lg rounded-bl-lg text-stone-300 text-xs leading-loose max-w-[85%] break-words">
+                        ${aiText.replace(/\n/g, '<br>')}
+                    </div>
+                `;
+                chatHistory.appendChild(aiMsg);
+            } catch (error) {
+                console.error(error);
+                const errMsg = document.createElement('div');
+                errMsg.className = "flex gap-3 items-start animate__animated animate__fadeInUp animate__faster";
+                errMsg.innerHTML = `
+                    <div class="w-8 h-8 rounded bg-stone-700 flex items-center justify-center shrink-0 border border-stone-600 text-classic-red text-xs font-black">异</div>
+                    <div class="bg-stone-800 border border-classic-red p-3 rounded-r-lg rounded-bl-lg text-classic-red text-xs leading-loose max-w-[85%]">
+                        山高路远，传书未达，请阁下稍后再试。
+                    </div>
+                `;
+                chatHistory.appendChild(errMsg);
+            } finally {
+                loadingEl.classList.add('hidden');
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }
+        }
+
+        // 5. 创业沙盘 (Sandbox) Logic
+        const sandboxStory = [
+            {
+                title: "第一局：择道",
+                subtitle: "Segmentation (市场细分)",
+                desc: "凛冬已过，万象更新。阁下手中握有三百万启动资金，欲在新茶饮的红海中开辟疆土。千里之行始于足下，首先，您必须确定品牌的核心品类，这直接决定了您的基础客群：",
+                options: [
+                    { text: "【原叶鲜奶茶】主打健康低负担、突出茶底香气", score: 20 },
+                    { text: "【现磨快取咖啡】主打高频刚需、提神醒脑", score: 20 },
+                    { text: "【杂糅铺子】奶茶、咖啡、果汁全上，什么火卖什么", score: -20 }
+                ]
+            },
+            {
+                title: "第二局：点将",
+                subtitle: "Targeting (目标市场)",
+                desc: "品类方向已定。资金有限，好钢用在刀刃上。接下来是至关重要的选址与定价策略，您必须精准出击：",
+                options: [
+                    { text: "【核心商圈 L1/B1】定价15-20元，瞄准注重品质的一二线白领", score: 30 },
+                    { text: "【写字楼大堂与底商】定价9.9元，瞄准对价格与效率敏感的打工人", score: 30 },
+                    { text: "【下沉市场街边小店】定价18元，指望小镇青年为高价买单", score: -30 }
+                ]
+            },
+            {
+                title: "第三局：立魂",
+                subtitle: "Positioning (市场定位)",
+                desc: "门店顺利开业，但周边竞品林立，甚至打起了价格战。如何让受众在众多品牌中只钟情于您？您需要策划一场定调营销：",
+                options: [
+                    { text: "【文化溯源】深挖东方茶文化，推出版画包装与非遗联名，拔高调性", score: 30 },
+                    { text: "【科技赋能】开发专属APP，玩转私域流量与裂变，打造效率人设", score: 30 },
+                    { text: "【博取眼球】雇佣水军炒作负面话题，使用低俗擦边广告语换取流量", score: -40 }
+                ]
+            },
+            {
+                title: "第四局：守正",
+                subtitle: "Crisis & Expansion (扩张与危机)",
+                desc: "生意渐入佳境，正准备开放加盟，但供应链传来噩耗：优质原叶茶与咖啡豆价格暴涨30%。面对利润缩水，您的对策是：",
+                options: [
+                    { text: "【死磕品质】咬牙承受，优化仓储与数字化物流，绝不降低饮品口感", score: 20 },
+                    { text: "【偷工减料】悄悄换用植脂末与低价碎茶，反正绝大多数消费者喝不出来", score: -50 }
+                ]
+            }
+        ];
+
+        let sbCurrentStep = 0;
+        let sbScore = 0;
+
+        window.initSandbox = function() {
+            sbCurrentStep = 0;
+            sbScore = 0;
+            document.getElementById('sb-result').classList.add('hidden');
+            const content = document.getElementById('sb-content');
+            content.classList.remove('hidden');
+            content.classList.remove('animate__fadeIn');
+            void content.offsetWidth;
+            content.classList.add('animate__fadeIn');
+            updateSandboxUI();
+        };
+
+        window.handleSandboxChoice = function(points) {
+            sbScore += points;
+            
+            // 积分跳动动画
+            const scoreEl = document.getElementById('sb-score');
+            scoreEl.classList.add('animate__animated', 'animate__heartBeat');
+            scoreEl.innerText = sbScore;
+            setTimeout(() => scoreEl.classList.remove('animate__heartBeat'), 1000);
+
+            sbCurrentStep++;
+            
+            const content = document.getElementById('sb-content');
+            content.classList.remove('animate__fadeIn');
+            void content.offsetWidth;
+            content.classList.add('animate__fadeIn');
+
+            if (sbCurrentStep < sandboxStory.length) {
+                updateSandboxUI();
+            } else {
+                showSandboxResult();
+            }
+        };
+
+        function updateSandboxUI() {
+            const data = sandboxStory[sbCurrentStep];
+            document.getElementById('sb-stage-title').innerText = data.title;
+            document.getElementById('sb-stage-subtitle').innerText = data.subtitle;
+            document.getElementById('sb-desc').innerText = data.desc;
+            document.getElementById('sb-score').innerText = sbScore;
+
+            const optionsContainer = document.getElementById('sb-options');
+            optionsContainer.innerHTML = '';
+            
+            data.options.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full p-5 bg-white border border-stone-200 hover:border-classic-red hover:shadow-md transition transform hover:-translate-y-1 text-left flex items-start gap-4 rounded-sm group";
+                btn.innerHTML = `
+                    <span class="text-classic-red opacity-50 group-hover:opacity-100 transition mt-1"><i data-lucide="chevron-right" class="w-5 h-5"></i></span>
+                    <span class="text-stone-800 font-bold leading-relaxed">${opt.text}</span>
+                `;
+                btn.onclick = () => window.handleSandboxChoice(opt.score);
+                optionsContainer.appendChild(btn);
+            });
+            lucide.createIcons();
+        }
+
+        function showSandboxResult() {
+            document.getElementById('sb-content').classList.add('hidden');
+            const resultPanel = document.getElementById('sb-result');
+            resultPanel.classList.remove('hidden');
+            resultPanel.classList.add('animate__fadeIn');
+
+            const titleEl = document.getElementById('sb-result-title');
+            const descEl = document.getElementById('sb-result-desc');
+
+            if (sbScore >= 90) {
+                titleEl.innerText = "独角兽诞生";
+                titleEl.className = "text-4xl font-black text-classic-red mb-4 tracking-widest";
+                descEl.innerHTML = `最终声望：<strong class="text-classic-red text-xl">${sbScore}</strong> 点。<br><br>干得漂亮！您精准地踩准了 STP 战略的每一步。细分清晰、定位高级且在危机中坚守底线。您的品牌现已敲钟上市，成为新茶饮大航海时代的掌舵人！`;
+            } else if (sbScore >= 50) {
+                titleEl.innerText = "偏安一隅";
+                titleEl.className = "text-4xl font-black text-heytea-gold mb-4 tracking-widest";
+                descEl.innerHTML = `最终声望：<strong class="text-heytea-gold text-xl">${sbScore}</strong> 点。<br><br>您的品牌在激烈的竞争中活了下来，成为区域霸主。但在某些环节出现了摇摆，未能建立起牢不可破的护城河。`;
+            } else {
+                titleEl.innerText = "黯然退场";
+                titleEl.className = "text-4xl font-black text-stone-500 mb-4 tracking-widest";
+                descEl.innerHTML = `最终声望：<strong class="text-stone-500 text-xl">${sbScore}</strong> 点。<br><br>商场如战场。混乱的定位、错误的选址或是在品质上的妥协，让您的品牌失去了消费者的信任。资金链断裂，您不得不含泪关停所有门店。`;
+            }
+        }
+
+        // 页面加载时初始化沙盘
+        document.addEventListener("DOMContentLoaded", () => {
+            window.initSandbox();
+        });
+    </script>
+</body>
+</html>
